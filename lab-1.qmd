@@ -1,0 +1,31 @@
+---
+title: "Lab 1 - Data visualization"
+format: html
+editor: visual
+---
+
+# Questions
+
+## Part 1
+
+### Question 1
+
+### Question 2
+
+### Question 3
+
+### Question 4
+
+### Question 5
+
+### Question 6
+
+### Question 7
+
+## Part 2
+
+**Enough about the Midwest!**
+
+### Question 8
+
+### Question 9
