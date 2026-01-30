@@ -133,7 +133,26 @@ When compared to other racial compositions (Black Americans, Whites, Asians and 
 ## Part 2
 
 **Enough about the Midwest!**
+```{r}
+nc_county <- read_csv("data/nc-county.csv")
+```
 
 ### Question 8
+#### Comment
+Usually, there is a positive correlation between Land Area and Population Density as people like spacious and bigger places to live and raise their families.
+```{r}
+p<-ggplot(nc_county,aes(x=land_area_mi2,y=density))+labs(x="Land Area (Square Miles)",y="Population Density",title="Land Area vs Population Density")+geom_point()+geom_smooth(se =  FALSE)
+p
+
+```
+#### Comment
+There is an almost straight, or stable, relationship between land area and population density. It looks like my guess was incorrect. Apparently, there is no positive or negative relationship between the variables.
 
 ### Question 9
+```{r}
+p<-ggplot(nc_county,aes(x=land_area_m2,y=density))+labs(x="Land Area (Square Meters)",y="Population Density",title="Land Area vs Population Density")+geom_point()+geom_smooth(se =  FALSE)
+p
+
+```
+#### Comment
+This graph is very similar to the one in the last question, showing the same trend. This is because the unit of measurement doesn’t affect the relationship between the variables.
