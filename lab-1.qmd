@@ -14,12 +14,15 @@ author: "Prabhjot Singh"
 ```{r}
 library(tidyverse)
 library(ggplot2)
-
+library(plotly)
 ```
+
 #### Midwest Dataset
+
 ```{r}
 midwest
 ```
+
 ```{r}
 ggplot(midwest, aes(x = popdensity)) +
   geom_histogram(binwidth = 100) +
@@ -31,13 +34,78 @@ ggplot(midwest, aes(x = popdensity)) +
   )
 ```
 
+```{r}
+ggplot(midwest, aes(x = popdensity)) +
+  geom_histogram(binwidth = 1000) +
+  labs(
+    x = "Population density",
+    y = "Count",
+    title = "Population density of midwesten counties",
+    subtitle = "Binwidth = 1000"
+  )
+```
+
+```{r}
+ggplot(midwest, aes(x = popdensity)) +
+  geom_histogram(binwidth = 10000) +
+  labs(
+    x = "Population density",
+    y = "Count",
+    title = "Population density of midwesten counties",
+    subtitle = "Binwidth = 10000"
+  )
+```
+
+```{r}
+ggplot(midwest, aes(x = popdensity)) +
+  geom_histogram(binwidth = 100000) +
+  labs(
+    x = "Population density",
+    y = "Count",
+    title = "Population density of midwesten counties",
+    subtitle = "Binwidth = 100000"
+  )
+```
+####Comment: Histogram with binwidth set to 1000 is the most appropriate as it makes it easy to infer details about the data on the other hand, when binwidth is set to 100 it is hard to make out anything as everything is very close to each and when set to 10000 or 100000, the bins are too broad to infer anything.
+
 ### Question 2
+```{r}
+ggplot(midwest,aes(x = popdensity))+geom_density()+labs(x="Population Density",y="Count",title="Population Density of Midwestern Counties")
+```
+```{r}
+midwest|>select(county, popdensity)|>arrange(desc(popdensity))
+midwest|>summarise(population_density=mean(popdensity),n=n())
+
+```
+#### Comment
+The overall range of population density is very wide and right-skewed. Most counties have an average population density of about 3,097 people per unit area. Across the full range, most counties fall on the lower end of the scale, with only a handful having significantly higher population densities. One clear outlier is Cook County, with a population density of 88,018.40, which makes sense given that it is the most populous county in the U.S.
 
 ### Question 3
+```{r}
+p<-ggplot(midwest,aes(x=percollege,y=percbelowpoverty,colour = state,shape = state))+geom_point()+labs(x="Percentage with College Degree",y="Percentage Below Poverty",title="Percentage of People with College Degree vs Below Poverty",subtitle = "By State")
+p
+ggplotly(p)
+```
+#### Comment
+There is a downward trend between the percentage of people with a college degree and the percentage of people below the poverty line, which means that, generally, as people become more educated, they rise above the poverty line. There is one noticeable outlier: Menominee County in Wisconsin, where 7.3% of the population has a college degree and 48.7% are below the poverty line. In most counties, the general trend of decay holds, with some dissimilarities, such as in Ohio, where counties fall within a similar range, and in Illinois, which has a significant outlier: Jackson County, where 36.6% of people have a college degree and 28.4% are below the poverty line.
 
 ### Question 4
+```{r}
+p<-ggplot(midwest,aes(x=percollege,y=percbelowpoverty,colour = state,shape = state))+geom_point()+geom_smooth(se=FALSE)+facet_wrap(~state)+labs(x="Percentage with College Degree",y="Percentage Below Poverty",title="Percentage of People with College Degree vs Below Poverty",subtitle = "By State")
+p
+#ggplotly(p)
+```
 
+#### Comment
+I prefer this graph over the previous one, as the correlations between the variables can be easily identified. The addition of the smooth curve greatly helps in establishing outliers and highlighting the regions where most points are concentrated.
 ### Question 5
+```{r}
+p<-ggplot(midwest,aes(x=area,y=state,colour = state))+geom_boxplot()+labs(x="Area of County (Units Unknown) ",y="State",title="Area of County by State")
+p
+ggplotly(p)
+```
+#### Comment
+While the range of county area sizes is consistent across states, Wisconsin has the largest interquartile range, with counties that include both the smallest area (area = 0.014) and one of the largest areas (area = 0.094) without being considered outliers. In contrast, Indiana has the smallest interquartile range. The most extreme outlier is Marquette County in Michigan.
 
 ### Question 6
 
