@@ -93,7 +93,7 @@ There is a downward trend between the percentage of people with a college degree
 ```{r}
 p<-ggplot(midwest,aes(x=percollege,y=percbelowpoverty,colour = state,shape = state))+geom_point()+geom_smooth(se=FALSE)+facet_wrap(~state)+labs(x="Percentage with College Degree",y="Percentage Below Poverty",title="Percentage of People with College Degree vs Below Poverty",subtitle = "By State")
 p
-#ggplotly(p)
+
 ```
 
 #### Comment
@@ -102,15 +102,34 @@ I prefer this graph over the previous one, as the correlations between the varia
 ```{r}
 p<-ggplot(midwest,aes(x=area,y=state,colour = state))+geom_boxplot()+labs(x="Area of County (Units Unknown) ",y="State",title="Area of County by State")
 p
-ggplotly(p)
+
 ```
 #### Comment
 While the range of county area sizes is consistent across states, Wisconsin has the largest interquartile range, with counties that include both the smallest area (area = 0.014) and one of the largest areas (area = 0.094) without being considered outliers. In contrast, Indiana has the smallest interquartile range. The most extreme outlier is Marquette County in Michigan.
 
 ### Question 6
+```{r}
+#Creating another variable based on the inmetro value, if 1 then yes otherwise no
+midwest <- midwest |>
+  mutate(metro = if_else(inmetro == 1, "Yes", "No"))
+p<-ggplot(midwest,aes(x=state,fill = metro))+labs(x="State",y="Proportion",title="Metro vs Non-Metro Counties",subtitle = "by State")+geom_bar()+scale_y_continuous(labels=scales::label_percent(suffix = "",scale = 1/100))
+p
 
+
+```
+
+#### Comment
+Generally, in all of the given states, most counties are not considered a metro area. In Wisconsin, about 74% of the counties are classified as non-metro and about 25% as metro. Ohio has a more balanced distribution, with roughly half(50%) of its counties considered metro and the other half non-metro. Illinois(), Indiana, and Michigan each have a greater number of counties classified as non-metro than metro.
 ### Question 7
+```{r}
+p<-ggplot(midwest,aes(x=percollege,y=percbelowpoverty,colour = percwhite))+labs(x="% College Educated",y="% Below the Poverty Line",title="Percentage of Population with College Degree vs Below Poverty Line",subtitle = "with racial composition per county")+geom_point()+facet_wrap(~state)+theme()
+p
+ggplotly(p)
+```
 
+#### Comment
+Menominee County is the greatest outlier in Wisconsin.
+When compared to other racial compositions (Black Americans, Whites, Asians and other races) American Indians have the highest percentage in Menominee and with almost no Black Americans there.
 ## Part 2
 
 **Enough about the Midwest!**
