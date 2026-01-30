@@ -2,6 +2,7 @@
 title: "Lab 1 - Data visualization"
 format: html
 editor: visual
+author: "Prabhjot Singh"
 ---
 
 # Questions
@@ -9,6 +10,26 @@ editor: visual
 ## Part 1
 
 ### Question 1
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+
+```
+#### Midwest Dataset
+```{r}
+midwest
+```
+```{r}
+ggplot(midwest, aes(x = popdensity)) +
+  geom_histogram(binwidth = 100) +
+  labs(
+    x = "Population density",
+    y = "Count",
+    title = "Population density of midwesten counties",
+    subtitle = "Binwidth = 100"
+  )
+```
 
 ### Question 2
 
