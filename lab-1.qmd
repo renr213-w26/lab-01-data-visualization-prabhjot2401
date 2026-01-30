@@ -66,7 +66,7 @@ ggplot(midwest, aes(x = popdensity)) +
     subtitle = "Binwidth = 100000"
   )
 ```
-####Comment: Histogram with binwidth set to 1000 is the most appropriate as it makes it easy to infer details about the data on the other hand, when binwidth is set to 100 it is hard to make out anything as everything is very close to each and when set to 10000 or 100000, the bins are too broad to infer anything.
+#### Comment: Histogram with binwidth set to 1000 is the most appropriate as it makes it easy to infer details about the data on the other hand, when binwidth is set to 100 it is hard to make out anything as everything is very close to each and when set to 10000 or 100000, the bins are too broad to infer anything.
 
 ### Question 2
 ```{r}
@@ -98,6 +98,7 @@ p
 
 #### Comment
 I prefer this graph over the previous one, as the correlations between the variables can be easily identified. The addition of the smooth curve greatly helps in establishing outliers and highlighting the regions where most points are concentrated.
+
 ### Question 5
 ```{r}
 p<-ggplot(midwest,aes(x=area,y=state,colour = state))+geom_boxplot()+labs(x="Area of County (Units Unknown) ",y="State",title="Area of County by State")
@@ -120,6 +121,7 @@ p
 
 #### Comment
 Generally, in all of the given states, most counties are not considered a metro area. In Wisconsin, about 74% of the counties are classified as non-metro and about 25% as metro. Ohio has a more balanced distribution, with roughly half(50%) of its counties considered metro and the other half non-metro. Illinois(), Indiana, and Michigan each have a greater number of counties classified as non-metro than metro.
+
 ### Question 7
 ```{r}
 p<-ggplot(midwest,aes(x=percollege,y=percbelowpoverty,colour = percwhite))+labs(x="% College Educated",y="% Below the Poverty Line",title="Percentage of Population with College Degree vs Below Poverty Line",subtitle = "with racial composition per county")+geom_point()+facet_wrap(~state)+theme()
